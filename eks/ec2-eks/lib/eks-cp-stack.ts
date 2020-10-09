@@ -1,4 +1,4 @@
-import * as cdk from '@aws-cdk/core';
+import cdk = require('@aws-cdk/core');
 const ec2 = require('@aws-cdk/aws-ec2');
 const eks = require('@aws-cdk/aws-eks');
 const iam = require('@aws-cdk/aws-iam');
@@ -54,15 +54,15 @@ export class EksCpStack extends cdk.Stack {
     });
 
     // Create cluster
-    // const cluster = new eks.Cluster(this, 'eks-cluster', {
-    //   version: eks.KubernetesVersion.V1_16
-    // });
+    const eksCluster = new eks.Cluster(this, 'eks-cluster', {
+      version: eks.KubernetesVersion.V1_17,
+      defaultCapacity: 0,
+      defaultCapacityInstance: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.SMALL)
+    });
 
-    // // Stack outputs
+    // Stack outputs
     const publicSubnetIds = eksCpVpc.publicSubnets.map((s:any) => s.subnetId);
     const privateSubnetIds = eksCpVpc.privateSubnets.map((s:any) => s.subnetId);
-    const eksCpVpcId = this.stackOutput('EksCpVpcId', eksCpVpc.vpcId);
-    // const eksCpSecurityGroupId = this.stackOutput('EksCpSecurityGroupId', eksCpSg.securityGroupId);
     const eksClusterName = this.stackOutput('EksClusterName', eksCluster.clusterName);
   }
   
