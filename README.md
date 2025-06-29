@@ -1,9 +1,42 @@
-# Infrastructure as a Code
+# AWS CDK Infrastructure Templates
 
-## What is IaC?
+This repository provides example AWS Cloud Development Kit (CDK) projects that demonstrate how to define infrastructure as code. Use these templates as a starting point for provisioning AWS resources with TypeScript.
 
-Infrastructure as a Code is the process of managing and provisioning system resources through human and machine-readable definition files, rather than manually setting up them. Storing definition files in a version control system allows engineers to gradually rollout changes, do easy rollbacks and store infrastructure changes inside a version control system.
+## Repository structure
 
-Tools like Terraform and Cloudformation are really popular choices among IaC tools, but they have shortcomings. The learning curve is one of them. Managing complex Cloudformation templates is no fun either.
+- **ec2/single-instance** – Deploys a single EC2 instance in its own VPC
+- **eks/ec2-eks** – Provisions an Amazon EKS control plane backed by EC2 networking
 
-CDK uses Cloudformation under the hood, but you are not managing those templates. CDK enables programmers who might not have previous IaC experience to provision and manage Cloud resources using mainstream programming languages.
+Each directory contains an independent CDK application with its own README explaining how to build, test, and deploy that stack.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) 10.x or newer
+- [AWS CDK](https://docs.aws.amazon.com/cdk/) CLI installed globally (`npm install -g aws-cdk`)
+- AWS credentials configured for your account
+
+## Usage
+
+Navigate into any example directory and install its dependencies:
+
+```bash
+cd ec2/single-instance
+npm install
+```
+
+Synthesize the CloudFormation template or deploy the stack:
+
+```bash
+cdk synth
+cdk deploy
+```
+
+See the subproject READMEs for detailed commands and explanation of the resources created.
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or pull requests for improvements or new templates.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
